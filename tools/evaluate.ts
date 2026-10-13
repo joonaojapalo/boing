@@ -1,6 +1,6 @@
 /**
  * Run the jump analysis on every manifest video that has extracted landmarks.
- * Usage: npm run evaluate -- [--data ../boing-data] [--min-visibility 0.5]
+ * Usage: npm run evaluate -- [--data ../boing-data] [--min-visibility 0.5] [--variant @image]
  * Writes <data>/results/results.json and prints a markdown table.
  */
 import { mkdirSync, readFileSync, writeFileSync, existsSync } from "node:fs";
@@ -18,6 +18,8 @@ const opt = (name: string, def: string) => {
 };
 const data = resolve(opt("--data", join(repo, "..", "boing-data")));
 const minVisibility = Number(opt("--min-visibility", "0.5"));
+// Landmark variant from extract_pose.py, e.g. "@image" or "@every4".
+const variant = opt("--variant", "");
 
 interface Entry { id: string; arms: string; view: string }
 const manifest: Entry[] = JSON.parse(readFileSync(join(repo, "testdata", "videos.json"), "utf8"));
@@ -26,7 +28,7 @@ const results = [];
 console.log("| video | arms | # | t_off s | h primary cm | h flight cm | frames | g implied | flags |");
 console.log("|---|---|---|---|---|---|---|---|---|");
 for (const e of manifest) {
-  const path = join(data, "landmarks", `${e.id}.json`);
+  const path = join(data, "landmarks", `${e.id}${variant}.json`);
   if (!existsSync(path)) continue;
   const video: PoseVideo = JSON.parse(readFileSync(path, "utf8"));
   const signals = toSignals(video, { minVisibility });
@@ -41,4 +43,4 @@ for (const e of manifest) {
   );
 }
 mkdirSync(join(data, "results"), { recursive: true });
-writeFileSync(join(data, "results", "results.json"), JSON.stringify(results));
+writeFileSync(join(data, "results", `results${variant}.json`), JSON.stringify(results));

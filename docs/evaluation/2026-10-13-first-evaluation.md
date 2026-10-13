@@ -80,6 +80,10 @@ h_P = takeoff→apex (`g/2·(t_apex − t_off)²`), h_F = flight time (`g·T²/8
   motion blur and the foot extending/flexing near the ground, plus whatever offset the
   mat itself has. With n = 3, offset and noise can't be separated.
 - Keypoint jitter: small in comparison (fit residuals ≈ 1 % of body height).
+- MediaPipe's temporal smoothing (VIDEO mode) is not the main cause. Re-running in
+  IMAGE mode (every frame independent, `extract_pose.py --mode image`) gave
+  52.5 / 48.4 / 51.5 cm against the mat's 52.9 / 52.8 / 54.6 cm (mean error −2.6 vs
+  −3.0 cm, within noise), with noisier fits. VIDEO mode stays the default.
 
 ## Next step: decisive test with our own recordings
 
@@ -95,6 +99,6 @@ One session gives the full accuracy curve:
 4. Analyse the 240 fps video, and the same video decimated to 120/60/30 fps
    (keep every 2nd/4th/8th frame). That shows exactly how the error depends on frame rate.
 
-Before that, the tooling needs: (a) correct handling of slow-motion files (iPhone
-slow-mo `.mov` stores 240 fps timestamps; verify that OpenCV reads them), and
-(b) a decimation option in the extractor.
+The extractor already supports decimation (`--every 2|4|8`, evaluated with
+`npm run evaluate -- --variant @every4`). Still to verify: that OpenCV reads the real
+240 fps timestamps of iPhone slow-motion `.mov` files (rather than the 30 fps playback rate).

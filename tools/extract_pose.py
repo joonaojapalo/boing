@@ -15,7 +15,7 @@ from mediapipe.tasks.python import BaseOptions, vision
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
-def extract(video_path, model_path):
+def extract(video_path, model_path, mode="video", every=1):
     cap = cv2.VideoCapture(video_path)
     if not cap.isOpened():
         raise RuntimeError(f"cannot open {video_path}")
@@ -23,21 +23,26 @@ def extract(video_path, model_path):
     fps = cap.get(cv2.CAP_PROP_FPS)
     options = vision.PoseLandmarkerOptions(
         base_options=BaseOptions(model_asset_path=model_path),
-        running_mode=vision.RunningMode.VIDEO,
+        # VIDEO mode tracks and smooths landmarks over time; IMAGE mode treats frames independently.
+        running_mode=vision.RunningMode.VIDEO if mode == "video" else vision.RunningMode.IMAGE,
         num_poses=1,
     )
     frames = []
     last_ms = -1
+    index = -1
     with vision.PoseLandmarker.create_from_options(options) as landmarker:
         while True:
             ok, bgr = cap.read()
             if not ok:
                 break
             t = cap.get(cv2.CAP_PROP_POS_MSEC) / 1000.0
+            index += 1
+            if index % every:
+                continue  # simulate a lower frame rate
             ms = max(int(round(t * 1000)), last_ms + 1)  # detector needs strictly increasing ms
             last_ms = ms
             image = mp.Image(image_format=mp.ImageFormat.SRGB, data=cv2.cvtColor(bgr, cv2.COLOR_BGR2RGB))
-            result = landmarker.detect_for_video(image, ms)
+            result = landmarker.detect_for_video(image, ms) if mode == "video" else landmarker.detect(image)
             lm = None
             if result.pose_landmarks:
                 lm = [[round(p.x, 5), round(p.y, 5), round(p.z, 5), round(p.visibility, 3)]
@@ -51,6 +56,8 @@ def main():
     ap.add_argument("--data", default=os.path.join(os.path.dirname(REPO), "boing-data"))
     ap.add_argument("--model", default="pose_landmarker_heavy.task")
     ap.add_argument("--force", action="store_true")
+    ap.add_argument("--mode", choices=["video", "image"], default="video")
+    ap.add_argument("--every", type=int, default=1, help="keep every Nth frame (simulates lower fps)")
     ap.add_argument("ids", nargs="*")
     args = ap.parse_args()
 
@@ -63,13 +70,15 @@ def main():
     for entry in manifest:
         if args.ids and entry["id"] not in args.ids:
             continue
-        out = os.path.join(out_dir, entry["id"] + ".json")
+        suffix = ("" if args.mode == "video" else "@image") + ("" if args.every == 1 else f"@every{args.every}")
+        out = os.path.join(out_dir, entry["id"] + suffix + ".json")
         if os.path.exists(out) and not args.force:
             print(f"skip {entry['id']} (exists)")
             continue
         print(f"extract {entry['id']} ...", flush=True)
-        data = extract(os.path.join(args.data, entry["file"]), model_path)
-        data["id"] = entry["id"]
+        data = extract(os.path.join(args.data, entry["file"]), model_path, args.mode, args.every)
+        data["id"] = entry["id"] + suffix
+        data["fps"] = data["fps"] / args.every
         with open(out, "w") as f:
             json.dump(data, f, separators=(",", ":"))
         found = sum(1 for fr in data["frames"] if fr["lm"])
