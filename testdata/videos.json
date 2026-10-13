@@ -142,5 +142,13 @@
     "view": "oblique, static",
     "arms": "hips",
     "notes": "Repeated jumps."
+  },
+  {
+    "id": "own-20261013_173409",
+    "file": "own/20261013_173409.mp4",
+    "source": "own recording (Android), 2026-10-13",
+    "view": "front, phone on floor tilted up",
+    "arms": "hips",
+    "notes": "Variable frame rate: 30 fps, 60 fps around 17.5-21.5 s. Socks on wooden floor. No reference."
   }
 ]
