@@ -166,5 +166,13 @@
     "view": "front, phone on floor tilted up",
     "arms": "hips",
     "notes": "4K 60 fps constant. Phone on floor tilted up, socks, 2 jumps. No reference."
+  },
+  {
+    "id": "own-VID-20261013-WA0000",
+    "file": "own/VID-20261013-WA0000.mp4",
+    "source": "athlete recording (phone), shared via WhatsApp, 2026-10-13",
+    "view": "front, phone on floor tilted up",
+    "arms": "hips",
+    "notes": "Recompressed by WhatsApp: 480x848, ~30 fps. Sports hall, socks. Jumps ~8-19 s. Measured with another service too (consistent); values not recorded here yet."
   }
 ]
