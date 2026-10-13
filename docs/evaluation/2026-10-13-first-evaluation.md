@@ -187,3 +187,21 @@ Boing's flight time (23.6, heavy) agrees. Boing's takeoff→apex (20.9) reads lo
 landmarks, takeoff comes out ≈ 20 ms late (17.35 s; fast-moving toes lag in VIDEO mode) while
 the hip apex lags only ≈ 10 ms (17.556 s), which shortens takeoff→apex. Worth testing whether
 IMAGE mode, or correcting the toe lag, removes this bias.
+
+### Pose landmark lag (VIDEO mode): experiment, no change yet (2026-10-14)
+
+On the athlete video, VIDEO-mode landmarks trail the pixels: toes ≈ 18–22 ms at takeoff and
+landing, hips ≈ 9 ms at the apex. That shortens takeoff→apex (20.9 instead of 22.8 cm). IMAGE
+mode doesn't lag but loses the person when the head leaves the frame. `tools/lag_experiment.py`
+runs heavy VIDEO mode forwards, with stretched timestamps (×10, ×100) and in reverse; averaging
+the forward and reverse landmarks cancels the lag ("fwd+rev"). Takeoff→apex / flight time, cm:
+
+| video (truth) | forward | stretched ×10 | reverse | fwd+rev |
+|---|---|---|---|---|
+| athlete (pixels: 22.8 / 23.2) | 20.9 / 23.6 | 21.0 / 23.2 | 23.9 / 24.4 | **22.6** / 24.5 |
+| contact mat (flight 52.9, 52.8, 54.6) | flight 52.4, 48.9, 50.6 | 52.9, 49.0, 51.3 | 54.2, 47.4, 54.4 | 53.3, 48.0, 52.4 |
+| force plate (46.1) | 43.7 | 44.0 | 43.6 | 43.7 |
+
+Fwd+rev fixes the one jump with a pixel truth, is mixed on the mat (mean error −2.8 → −2.2 cm,
+within the 30 fps scatter) and changes nothing on the force-plate jump. Not enough evidence to
+make refinement ~50 % slower; needs more jumps with an exact truth (slow motion, hand-marked).
