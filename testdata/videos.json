@@ -1,0 +1,67 @@
+[
+  {
+    "id": "ig-DRLgnAQlI8y",
+    "file": "instagram/DRLgnAQlI8y.mp4",
+    "source": "https://www.instagram.com/reel/DRLgnAQlI8y/",
+    "view": "front, handheld",
+    "arms": "hips",
+    "notes": "Edited reel, 2 athletes x 3 jumps, optical bar on floor. Possible speed ramps, moving camera.",
+    "reference": { "unit": "unknown", "Brendan": [24.7, 25.9, 24.9], "Adam": [25.1, 25.3, 27.0] }
+  },
+  {
+    "id": "yt-x-1aKYUhd_k",
+    "file": "youtube/x-1aKYUhd_k.mp4",
+    "source": "https://youtu.be/x-1aKYUhd_k",
+    "view": "front, static",
+    "arms": "hips",
+    "notes": "Ideal case: one jump, full body, static camera."
+  },
+  {
+    "id": "yt-DZV_RlzfSIY",
+    "file": "youtube/DZV_RlzfSIY.mp4",
+    "source": "https://youtu.be/DZV_RlzfSIY",
+    "view": "side, static",
+    "arms": "hips",
+    "notes": "CMJ vs squat jump, several jumps, graphic overlays."
+  },
+  {
+    "id": "yt-0NWWXm8jg6g",
+    "file": "youtube/0NWWXm8jg6g.mp4",
+    "source": "https://youtu.be/0NWWXm8jg6g",
+    "view": "front, static",
+    "arms": "bar",
+    "notes": "VALD ForceDecks, loaded CMJ with barbell."
+  },
+  {
+    "id": "yt-ElIb8VBrjLM",
+    "file": "youtube/ElIb8VBrjLM.mp4",
+    "source": "https://youtu.be/ElIb8VBrjLM",
+    "view": "front, static",
+    "arms": "free",
+    "notes": "Arm swing."
+  },
+  {
+    "id": "yt-3u1uz8ghdk0",
+    "file": "youtube/3u1uz8ghdk0.mp4",
+    "source": "https://youtu.be/3u1uz8ghdk0",
+    "view": "oblique, static",
+    "arms": "hips+free",
+    "notes": "Contact platform; first part hands on hips, later with arm swing."
+  },
+  {
+    "id": "yt-09yR5a4u-6A",
+    "file": "youtube/09yR5a4u-6A.mp4",
+    "source": "https://youtu.be/09yR5a4u-6A",
+    "view": "side, static",
+    "arms": "free",
+    "notes": "Dark gym, arm swing, 50 fps."
+  },
+  {
+    "id": "yt-A7GeA3lBpg8",
+    "file": "youtube/A7GeA3lBpg8.mp4",
+    "source": "https://youtu.be/A7GeA3lBpg8",
+    "view": "oblique, several people",
+    "arms": "free",
+    "notes": "50 fps, people walking through frame."
+  }
+]
