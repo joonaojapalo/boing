@@ -21,7 +21,7 @@ const minVisibility = Number(opt("--min-visibility", "0.5"));
 // Landmark variant from extract_pose.py, e.g. "@image" or "@every4".
 const variant = opt("--variant", "");
 
-interface Entry { id: string; arms: string; view: string }
+interface Entry { id: string; arms: string; view: string; timeScale?: number }
 const manifest: Entry[] = JSON.parse(readFileSync(join(repo, "testdata", "videos.json"), "utf8"));
 
 const results = [];
@@ -31,6 +31,13 @@ for (const e of manifest) {
   const path = join(data, "landmarks", `${e.id}${variant}.json`);
   if (!existsSync(path)) continue;
   const video: PoseVideo = JSON.parse(readFileSync(path, "utf8"));
+  // Slow-motion files store playback time; convert to real time. The extractor
+  // reads the scale from the file's metadata; the manifest can override it.
+  const timeScale = e.timeScale ?? video.timeScale;
+  if (timeScale) {
+    for (const f of video.frames) f.t *= timeScale;
+    video.fps /= timeScale;
+  }
   const signals = toSignals(video, { minVisibility });
   const jumps = findJumps(signals);
   results.push({ id: e.id, arms: e.arms, fps: video.fps, signals, jumps });

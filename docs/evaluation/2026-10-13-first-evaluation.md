@@ -102,3 +102,32 @@ One session gives the full accuracy curve:
 The extractor already supports decimation (`--every 2|4|8`, evaluated with
 `npm run evaluate -- --variant @every4`). Still to verify: that OpenCV reads the real
 240 fps timestamps of iPhone slow-motion `.mov` files (rather than the 30 fps playback rate).
+
+## Addendum: own recordings (Android, phone on the floor tilted up)
+
+Three videos, no reference device. All 9 jumps were detected and pass the checks.
+
+| Video | Capture | Jumps: h_P / h_F (cm) | g implied |
+|---|---|---|---|
+| 20261013_173409 | 30 fps, variable rate (60 fps stretches) | 20.6 / 22.8, 22.8 / 24.4, 22.6 / 26.0, **22.0 / 22.2 (60 fps)**, 29.3 / 26.7 | 6.2–8.5 |
+| 20261013_174441 | **120 fps slow motion**, stored at 29.6 fps | 23.3 / 24.3, 22.7 / 22.4 (≈50 frames in flight each) | 6.0–6.9 |
+| 20261013_174604 | 4K, 60 fps | 27.4 / 26.9, 26.3 / 23.9 | 7.7–8.1 |
+
+Findings:
+
+- **The height measurement is angle-robust**: it uses only event times (toe-off, toe
+  touchdown, hip apex), which a tilted or side-on camera doesn't change. Results are
+  consistent across 30/60/120 fps: 22–27 cm, and at 60–120 fps the two methods agree
+  within ≈1–2 cm per jump.
+- **The implied-g check is not angle-robust**: its body-size scale is distorted by a
+  floor-level camera tilted up (g read 6–8.5 on every jump). The bounds were widened
+  from 6.5–13 to 4–20 m/s². That still rejects ≥ 2× slow motion (g ≤ 2.5) and caught a
+  wrong time base in practice (see below).
+- **Slow motion**: Samsung writes `com.android.capture.fps` (e.g. 120) and stores the
+  file at a 30 fps playback rate. The extractor now reads it (`tools/mp4meta.py`) and
+  stores `timeScale` with the landmarks. Variable-frame-rate recordings *also* report a
+  high capture fps (their maximum, 60), so a file only counts as slow motion if its
+  shortest frame gaps are clearly longer than 1/capture fps. The first, naive rule
+  misread the variable-rate video as slowed; the g check flagged it (g ≈ 19–26).
+- Samsung also writes `SlowMotion_Data` (`21488:36888:3` here). Its meaning is unknown;
+  the whole clip turned out to be uniformly slowed (both jumps give the same g).

@@ -12,6 +12,9 @@ import cv2
 import mediapipe as mp
 from mediapipe.tasks.python import BaseOptions, vision
 
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from mp4meta import capture_fps  # noqa: E402
+
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
@@ -48,7 +51,18 @@ def extract(video_path, model_path, mode="video", every=1):
                 lm = [[round(p.x, 5), round(p.y, 5), round(p.z, 5), round(p.visibility, 3)]
                       for p in result.pose_landmarks[0]]
             frames.append({"t": round(t, 6), "lm": lm})
-    return {"video": os.path.basename(video_path), "width": width, "height": height, "fps": fps, "frames": frames}
+    result = {"video": os.path.basename(video_path), "width": width, "height": height, "fps": fps, "frames": frames}
+    # Slow motion: timestamps are playback time. timeScale converts them to real time.
+    # Variable-frame-rate recordings also report a high capture fps (their maximum),
+    # but then the shortest frame gaps already match it, so compare against those.
+    cap_fps = capture_fps(video_path)
+    gaps = sorted(b["t"] - a["t"] for a, b in zip(frames, frames[1:]))
+    if cap_fps and gaps:
+        playback_fps = 1 / gaps[len(gaps) // 20]  # 5th percentile: fastest real spacing
+        if cap_fps > 1.5 * playback_fps:
+            result["captureFps"] = cap_fps
+            result["timeScale"] = playback_fps / cap_fps
+    return result
 
 
 def main():
@@ -82,7 +96,8 @@ def main():
         with open(out, "w") as f:
             json.dump(data, f, separators=(",", ":"))
         found = sum(1 for fr in data["frames"] if fr["lm"])
-        print(f"  {len(data['frames'])} frames, pose in {found}, {data['fps']:.2f} fps", flush=True)
+        slow = f", slow motion: captured at {data['captureFps']:.0f} fps" if "timeScale" in data else ""
+        print(f"  {len(data['frames'])} frames, pose in {found}, {data['fps']:.2f} fps{slow}", flush=True)
 
 
 if __name__ == "__main__":

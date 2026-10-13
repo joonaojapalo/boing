@@ -150,5 +150,21 @@
     "view": "front, phone on floor tilted up",
     "arms": "hips",
     "notes": "Variable frame rate: 30 fps, 60 fps around 17.5-21.5 s. Socks on wooden floor. No reference."
+  },
+  {
+    "id": "own-20261013_174441",
+    "file": "own/20261013_174441.mp4",
+    "source": "own recording (Android), 2026-10-13",
+    "view": "front, phone on floor tilted up",
+    "arms": "hips",
+    "notes": "Samsung slow motion: captured at 120 fps, stored at 29.61 fps playback (time scale read from metadata). Phone on floor tilted up, socks. No reference."
+  },
+  {
+    "id": "own-20261013_174604",
+    "file": "own/20261013_174604.mp4",
+    "source": "own recording (Android), 2026-10-13",
+    "view": "front, phone on floor tilted up",
+    "arms": "hips",
+    "notes": "4K 60 fps constant. Phone on floor tilted up, socks, 2 jumps. No reference."
   }
 ]
