@@ -181,5 +181,44 @@
         22.25
       ]
     }
+  },
+  {
+    "id": "own-20261014_020914",
+    "file": "own/20261014_020914.mp4",
+    "source": "own recording (Samsung Galaxy S24+, back camera), 2026-10-14",
+    "view": "front, phone on floor tilted up",
+    "arms": "hips",
+    "notes": "Samsung slow motion: captured at 240 fps, stored at 29.96 fps playback (8x; ~53 s real time). 1080x1920. 7 CMJs (plus walking in and out). Socks on tiles. Third jump: landing is an upper bound (one foot out of view).",
+    "reference": {
+      "unit": "cm",
+      "method": "hand-marked at 240 fps: takeoff = last foot off, landing = first foot down (flight time)",
+      "times_s": [
+        7.325,
+        12.421,
+        17.661,
+        25.089,
+        31.239,
+        38.076,
+        46.484
+      ],
+      "flight_ms": [
+        342,
+        392,
+        367,
+        397,
+        362,
+        378,
+        368
+      ],
+      "values": [
+        14.4,
+        18.8,
+        16.5,
+        19.3,
+        16.1,
+        17.5,
+        16.6
+      ]
+    }
   }
 ]
