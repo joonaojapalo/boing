@@ -205,3 +205,30 @@ the forward and reverse landmarks cancels the lag ("fwd+rev"). Takeoff→apex / 
 Fwd+rev fixes the one jump with a pixel truth, is mixed on the mat (mean error −2.8 → −2.2 cm,
 within the 30 fps scatter) and changes nothing on the force-plate jump. Not enough evidence to
 make refinement ~50 % slower; needs more jumps with an exact truth (slow motion, hand-marked).
+
+### Hand-marked reference jumps (2026-10-14)
+
+Takeoff and landing read from the pixels (feet against the mat/plate), compared with Boing (heavy, VIDEO mode).
+
+**Contact-mat video (`yt-3u1uz8ghdk0`) has wrong frame times.** It was filmed at 25 fps and converted to
+29.97 fps by repeating every 5th frame (one exact duplicate every 6 frames, the phase drifting slowly), so
+the file's timestamps are off by up to ±27 ms. Dropping the duplicates and retiming at 40 ms halves the
+flight-parabola residuals (5.0 → 2.5, 3.4 → 2.9, 3.6 → 1.5 px). Flight times (ms):
+
+| jump | visible in video | Boing, retimed | Boing, file times | mat |
+|---|---|---|---|---|
+| 1 | ≈ 625 (600–640) | 653 | 650 | 657 |
+| 2 | ≈ 605 (595–620) | 641 | 632 | 656 |
+| 3 | ≈ 640 (625–650) | 639 | 642 | 667 |
+
+The mat reads 25–50 ms longer than anything the video shows (even the most generous frame choice),
+so most of Boing's "−2.5 cm vs the mat" is not Boing's error. Boing's takeoffs are at or slightly before the
+visible ones; landings 0–15 ms late. The ≈ 18 ms takeoff lag of the athlete video does not show here.
+
+**Force-plate video (`yt-O-aTakZ5gwk`, 29.86 fps, no duplicates).** Takeoff 3.49–3.50 s (Boing 3.497), landing
+4.09–4.10 s (Boing 4.102), flight midpoint 3.795 s (Boing apex 3.796). Takeoff→apex ≈ 44 cm (Boing 43.7);
+the plate's 46.1 cm is read from a blurry display (could be 41.0). No lag visible.
+
+At 25–30 fps with motion blur, hand-marking is good to about ±15 ms per edge (±2–3 cm on these jumps), not
+enough to settle 1–2 cm questions. The landmark lag seems to depend on the video (camera angle, how the
+feet move after takeoff); the forward+reverse fix stays parked until a slow-motion session gives exact truths.

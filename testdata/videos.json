@@ -58,7 +58,7 @@
     "source": "https://youtu.be/3u1uz8ghdk0",
     "view": "oblique, static",
     "arms": "hips+free",
-    "notes": "Contact platform; first part hands on hips, later with arm swing.",
+    "notes": "Contact platform; first part hands on hips, later with arm swing. Filmed at 25 fps, converted to 29.97 by repeating every 5th frame: file timestamps are off by up to 27 ms (see docs/evaluation). The mat's flight times are 25-50 ms longer than what the video shows.",
     "reference": {
       "unit": "cm",
       "method": "contact mat (flight time)",
