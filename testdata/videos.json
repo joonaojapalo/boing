@@ -173,7 +173,7 @@
     "source": "athlete recording (phone), shared via WhatsApp, 2026-10-13",
     "view": "front, phone on floor tilted up",
     "arms": "hips",
-    "notes": "Recompressed by WhatsApp: 480x848, ~30 fps. Sports hall, socks. One jump at ~17.4 s. Boing (file mode, as reported by the sender): 21.4 cm.",
+    "notes": "Recompressed by WhatsApp: 480x848, ~30 fps. Sports hall, socks. One jump at ~17.4 s. Boing (file mode, as reported by the sender): 21.4 cm. Manual frame analysis (docs/evaluation): takeoff 17.33 s, landing 17.765 s, apex 17.546 s: flight-time height 23.2 cm, takeoff->apex 22.8 cm.",
     "reference": {
       "unit": "cm",
       "method": "My Jump app (flight time)",

@@ -163,3 +163,27 @@ continuous recording on, the app no longer switches to lite on slow phones.
 one CMJ). My Jump: **22.25 cm** (flight time). Boing: flight time 23.6 cm (heavy), 24.9 (full),
 23.9 (lite); takeoff→apex 20.9 / 23.2 / 22.1. The app's file mode gave 21.4 cm (as reported).
 Flight time reads ≈ 1.4 cm above My Jump with heavy, about one frame of flight at 30 fps.
+
+### Manual frame-by-frame analysis of the same jump
+
+Pixels, not pose landmarks (30 fps, constant around the jump):
+
+- **Takeoff**: frame at 17.333 s still on the toes (heels up, toe tips on the floor), 17.367 s
+  both feet 14–21 px up. Extrapolating each foot's rise gives the last foot off at ≈ 17.33 s.
+- **Landing**: 17.733 s toes 17–21 px above the floor, 17.767 s touching (on the toes, heels up).
+  First contact ≈ 17.765 s.
+- **Apex** from the waist (bottom edge of the shirt; parabola over the flight, 0.6 px rms):
+  17.546 s. The flight midpoint is 17.548 s, so the jump is symmetric: tiptoe at both takeoff
+  and landing, i.e. about the same body height, and flight time is a fair measure here.
+
+| | time | height |
+|---|---|---|
+| flight 17.33 → 17.765 | 0.435 s (± 0.011) | **23.2 cm** (22.0–24.4) |
+| takeoff → apex | 0.216 s (± 0.008) | 22.8 cm (21.1–24.5) |
+| apex → landing | 0.219 s | 23.6 cm |
+
+Best estimate ≈ **23 cm**. My Jump (22.25) is 9 ms of flight shorter, within a third of a frame.
+Boing's flight time (23.6, heavy) agrees. Boing's takeoff→apex (20.9) reads low: from the pose
+landmarks, takeoff comes out ≈ 20 ms late (17.35 s; fast-moving toes lag in VIDEO mode) while
+the hip apex lags only ≈ 10 ms (17.556 s), which shortens takeoff→apex. Worth testing whether
+IMAGE mode, or correcting the toe lag, removes this bias.
