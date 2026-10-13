@@ -6,7 +6,19 @@
     "view": "front, handheld",
     "arms": "hips",
     "notes": "Edited reel, 2 athletes x 3 jumps, optical bar on floor. Possible speed ramps, moving camera.",
-    "reference": { "unit": "unknown", "Brendan": [24.7, 25.9, 24.9], "Adam": [25.1, 25.3, 27.0] }
+    "reference": {
+      "unit": "unknown",
+      "Brendan": [
+        24.7,
+        25.9,
+        24.9
+      ],
+      "Adam": [
+        25.1,
+        25.3,
+        27.0
+      ]
+    }
   },
   {
     "id": "yt-x-1aKYUhd_k",
@@ -46,7 +58,26 @@
     "source": "https://youtu.be/3u1uz8ghdk0",
     "view": "oblique, static",
     "arms": "hips+free",
-    "notes": "Contact platform; first part hands on hips, later with arm swing."
+    "notes": "Contact platform; first part hands on hips, later with arm swing.",
+    "reference": {
+      "unit": "cm",
+      "method": "contact mat (flight time)",
+      "times_s": [
+        16.96,
+        22.75,
+        28.63
+      ],
+      "flight_ms": [
+        657,
+        656,
+        667
+      ],
+      "values": [
+        52.9,
+        52.8,
+        54.6
+      ]
+    }
   },
   {
     "id": "yt-09yR5a4u-6A",
@@ -63,5 +94,53 @@
     "view": "oblique, several people",
     "arms": "free",
     "notes": "50 fps, people walking through frame."
+  },
+  {
+    "id": "yt-O-aTakZ5gwk",
+    "file": "youtube/O-aTakZ5gwk.mp4",
+    "source": "https://youtu.be/O-aTakZ5gwk",
+    "view": "front, static",
+    "arms": "hips",
+    "notes": "Hawkin force plate; iPad shows result. One jump ~3.8 s.",
+    "reference": {
+      "unit": "in",
+      "method": "force plate (takeoff velocity)",
+      "values": [
+        18.16
+      ],
+      "uncertain": "second digit could be 6 (16.16)"
+    }
+  },
+  {
+    "id": "yt-A33w43rknf0",
+    "file": "youtube/A33w43rknf0.mp4",
+    "source": "https://youtu.be/A33w43rknf0",
+    "view": "side, static",
+    "arms": "hips",
+    "notes": "On force plate; phone overlay with result, camera cuts."
+  },
+  {
+    "id": "yt-CJ_BGt3G0jI",
+    "file": "youtube/CJ_BGt3G0jI.mp4",
+    "source": "https://youtu.be/CJ_BGt3G0jI",
+    "view": "front, static",
+    "arms": "hips",
+    "notes": "24 fps, one jump."
+  },
+  {
+    "id": "yt-_19utncgGV0",
+    "file": "youtube/_19utncgGV0.mp4",
+    "source": "https://youtu.be/_19utncgGV0",
+    "view": "front, static",
+    "arms": "hips",
+    "notes": "One or two jumps."
+  },
+  {
+    "id": "yt-UABkrMpNunc",
+    "file": "youtube/UABkrMpNunc.mp4",
+    "source": "https://youtu.be/UABkrMpNunc",
+    "view": "oblique, static",
+    "arms": "hips",
+    "notes": "Repeated jumps."
   }
 ]
