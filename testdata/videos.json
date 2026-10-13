@@ -173,6 +173,13 @@
     "source": "athlete recording (phone), shared via WhatsApp, 2026-10-13",
     "view": "front, phone on floor tilted up",
     "arms": "hips",
-    "notes": "Recompressed by WhatsApp: 480x848, ~30 fps. Sports hall, socks. Jumps ~8-19 s. Measured with another service too (consistent); values not recorded here yet."
+    "notes": "Recompressed by WhatsApp: 480x848, ~30 fps. Sports hall, socks. One jump at ~17.4 s. Boing (file mode, as reported by the sender): 21.4 cm.",
+    "reference": {
+      "unit": "cm",
+      "method": "My Jump app (flight time)",
+      "values": [
+        22.25
+      ]
+    }
   }
 ]

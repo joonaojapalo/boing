@@ -156,3 +156,10 @@ Effect (takeoff→apex, cm; `@lite`/`@full` landmarks via `extract_pose.py --mod
 
 Lite also misses more jumps than full (3 of 5 vs 5 of 5 on the 30 fps recording), so with
 continuous recording on, the app no longer switches to lite on slow phones.
+
+## Addendum: athlete video with a My Jump reference (2026-10-14)
+
+`own-VID-20261013-WA0000` (front, phone on the floor tilted up, WhatsApp copy 480x848 at 30 fps,
+one CMJ). My Jump: **22.25 cm** (flight time). Boing: flight time 23.6 cm (heavy), 24.9 (full),
+23.9 (lite); takeoff→apex 20.9 / 23.2 / 22.1. The app's file mode gave 21.4 cm (as reported).
+Flight time reads ≈ 1.4 cm above My Jump with heavy, about one frame of flight at 30 fps.
