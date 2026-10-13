@@ -131,3 +131,28 @@ Findings:
   misread the variable-rate video as slowed; the g check flagged it (g ≈ 19–26).
 - Samsung also writes `SlowMotion_Data` (`21488:36888:3` here). Its meaning is unknown;
   the whole clip turned out to be uniformly slowed (both jumps give the same g).
+
+## Addendum: lighter pose models and toe creep (2026-10-14)
+
+A phone session (Android 10, live switched to the **lite** model) gave refined heights of
+22–52 cm for jumps the athlete judged all ≈ 26 cm; the high ones were flagged poor-fit.
+Cause: with lite (and sometimes full), the toe point **creeps up slowly** (≈ 5 % of body
+height over 0.2–0.3 s) while the heels rise in the push-off, and stays raised after landing.
+The airborne run then started at the creep, the flight looked longer, and the fits included
+non-free-fall frames. Heavy rarely does this.
+
+Fix (`trimCreep` in `src/analysis/jumps.ts`): flight starts where the toes' fast rise begins
+and ends where the fast fall stops (speed measured over ≥ 50 ms, "fast" ≥ 25 % of the jump's
+fastest); the edges are at that contact level. Only trimmed when the creep is small and short
+(≤ 10 % of body height, ≤ 0.4 s), so jumps without creep give exactly the previous results.
+
+Effect (takeoff→apex, cm; `@lite`/`@full` landmarks via `extract_pose.py --model …`):
+
+- Own 30 fps recording, full model: an outlier of 95 → 21; lite: 41.7 → 23.1; full at 15 fps: 64.7 → 22.3.
+- The phone session's live frames (≈ 21 fps): 42, 61, 20, 31, 46, 26, 47 → 26, 24, 20, 31, 26, 26, 38.
+- All reference videos (contact mat, force plate) and heavy-model results: unchanged.
+- Flight frames are now counted honestly, so at ≈ 15 fps some jumps fall below the 8-frame
+  minimum ("too short"); live, those are measured again from the 30 fps recording.
+
+Lite also misses more jumps than full (3 of 5 vs 5 of 5 on the 30 fps recording), so with
+continuous recording on, the app no longer switches to lite on slow phones.

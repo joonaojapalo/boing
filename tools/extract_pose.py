@@ -58,7 +58,7 @@ def extract(video_path, model_path, mode="video", every=1):
     cap_fps = capture_fps(video_path)
     gaps = sorted(b["t"] - a["t"] for a, b in zip(frames, frames[1:]))
     if cap_fps and gaps:
-        playback_fps = 1 / gaps[len(gaps) // 20]  # 5th percentile: fastest real spacing
+        playback_fps = every / gaps[len(gaps) // 20]  # 5th percentile: fastest real spacing (gaps span `every` frames)
         if cap_fps > 1.5 * playback_fps:
             result["captureFps"] = cap_fps
             result["timeScale"] = playback_fps / cap_fps
@@ -84,7 +84,9 @@ def main():
     for entry in manifest:
         if args.ids and entry["id"] not in args.ids:
             continue
-        suffix = ("" if args.mode == "video" else "@image") + ("" if args.every == 1 else f"@every{args.every}")
+        kind = args.model.replace("pose_landmarker_", "").replace(".task", "")
+        suffix = (("" if args.mode == "video" else "@image") + ("" if args.every == 1 else f"@every{args.every}")
+                  + ("" if kind == "heavy" else f"@{kind}"))
         out = os.path.join(out_dir, entry["id"] + suffix + ".json")
         if os.path.exists(out) and not args.force:
             print(f"skip {entry['id']} (exists)")
